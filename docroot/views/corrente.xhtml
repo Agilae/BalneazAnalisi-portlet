@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+
+<f:view
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+	<link rel="stylesheet" type="text/css" href="http://93.43.74.142:8080/style/custom_arpac.css"/>
+	
+	<h:head />
+	<h:body>
+	
+	
+	
+	<h:form id="form">
+	
+		<p:growl id="growl" showDetail="true" sticky="true" />  
+	
+        <p:inputText id="popupId"  value="#{corrente.scf.popupId}" style="display:none"/>
+        <p:inputText id="pathpopupportlet" value="#{corrente.scf.pathPopupPortlet}" style="display:none;width:96%"/>
+
+		<div class="ui-fluid">				
+
+		<p:dataTable id="analisigen" var="rowd" value="#{corrente.lstDett}"  
+		             rows="10" 
+		             paginator="false" 
+	             	 rowKey="#{rowd.descriz}" >  
+
+		    <p:column >   
+				<f:facet name="header">  
+		            <h:outputText value=""/>  
+		        </f:facet>
+                <h:outputText value="#{rowd.descriz}"/>
+		    </p:column>  
+
+		    <p:column >   
+				<f:facet name="header">  
+		            <h:outputText value=""/>  
+		        </f:facet>
+                <h:outputText value="#{rowd.valore}"/>
+		    </p:column>  
+
+		</p:dataTable>
+
+		<BR />
+		<BR />
+		
+		<p:dataTable id="analisi" var="rows" value="#{corrente.lstAnalisi}"  
+		             rows="10" paginatorPosition="bottom"
+					 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15"		             
+		             paginator="true" 
+	             	 rowKey="#{rows.analisiId}" >  
+
+
+
+		    <p:column >   
+				<f:facet name="header">  
+		            <h:outputText value="Parere"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.parere}" />
+		    </p:column>  
+
+
+		    <p:column >   
+				<f:facet name="header">  
+		            <h:outputText value="Data di prelievo"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.data_analisi}" escape="false">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+			    </h:outputText>					    
+		    </p:column>  
+
+		    <p:column sortBy="#{rows.ora_analisi}">   
+				<f:facet name="header">  
+		            <h:outputText value="Ora"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.ora_analisi}"/>  
+		    </p:column>  
+
+		    <p:column sortBy="#{rows.tipo}">   
+				<f:facet name="header">  
+		            <h:outputText value="Tipo di Analisi"/>  
+		        </f:facet>
+                <h:outputText id="tipo" value="#{rows.tipo}" />
+                
+	            <p:tooltip id="toolTip" for="tipo" autoShow="true">
+		            <h:outputText value="#{rows.toolTipTipo}" escape="false"/>
+	            </p:tooltip>
+                  
+		    </p:column>  
+
+
+		    <p:column sortBy="#{rows.enterococchi}">   
+				<f:facet name="header">  
+		            <h:outputText value="Enterococchi intestinali (UFC o MPN /100ml, valore limite 200)"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.enterococchi}"/>  
+		    </p:column>  
+			
+		    <p:column sortBy="#{rows.escherichia}">   
+				<f:facet name="header">  
+		            <h:outputText value="Escherichia coli (UFC o MPN /100ml,valore limite 500)"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.escherichia}"/>  
+		    </p:column>  
+
+
+
+
+		    <p:column sortBy="#{rows.temperatura_aria}">   
+				<f:facet name="header" >  
+		            <h:outputText value="Temperatura Aria"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.temperatura_aria}"/>  
+		    </p:column>  
+
+		    <p:column sortBy="#{rows.temperatura_acqua}">   
+				<f:facet name="header">  
+		            <h:outputText value="Temperatura Acqua"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.temperatura_acqua}"/>  
+		    </p:column>  
+
+
+		    <p:column sortBy="#{rows.schiuma_colore}">   
+				<f:facet name="header">  
+		            <h:outputText value="Schiuma Colore"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.schiuma_colore}"/>  
+		    </p:column>  
+
+		    <p:column sortBy="#{rows.schiuma_forma}">   
+				<f:facet name="header">  
+		            <h:outputText value="Schiuma Forma"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.schiuma_forma}"/>  
+		    </p:column>  
+
+		    <p:column sortBy="#{rows.schiuma_aspetto}">   
+				<f:facet name="header">  
+		            <h:outputText value="Schiuma Aspetto"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.schiuma_aspetto}"/>  
+		    </p:column>  
+
+
+
+
+
+		    <p:column sortBy="#{rows.mucillagine_colore}">   
+				<f:facet name="header">  
+		            <h:outputText value="Mucillagine Colore"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.mucillagine_colore}"/>  
+		    </p:column>  
+
+		    <p:column sortBy="#{rows.mucillagine_forma}">   
+				<f:facet name="header">  
+		            <h:outputText value="Mucillagine Forma"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.mucillagine_forma}"/>  
+		    </p:column>  
+
+		    <p:column sortBy="#{rows.mucillagine_aspetto}">   
+				<f:facet name="header">  
+		            <h:outputText value="Mucillagine Aspetto"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.mucillagine_aspetto}"/>  
+		    </p:column>  
+
+
+		    <p:column sortBy="#{rows.meduse}">   
+				<f:facet name="header">  
+		            <h:outputText value="Meduse Densita"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.meduse}"/>  
+		    </p:column>  
+
+		    <p:column sortBy="#{rows.rifiuti_solidi}">   
+				<f:facet name="header">  
+		            <h:outputText value="Rifiuti Solidi"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.rifiuti_solidi}"/>  
+		    </p:column>  
+
+
+		    <p:column sortBy="#{rows.residui}">   
+				<f:facet name="header">  
+		            <h:outputText value="Residui bitumosi o idrocarburi"/>  
+		        </f:facet>
+                <h:outputText value="#{rows.residui}"/>  
+		    </p:column>  
+
+
+
+
+
+		</p:dataTable>
+		
+		
+	    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    </p:confirmDialog>
+		
+		</div>  
+
+	</h:form>
+
+   <script type="text/javascript">
+        jQuery(document).ready(function(jQuery)
+        {
+        	//var randomNumber = Math.floor(Math.random()*(10000-1+1)+1);
+        	//jQuery('#marcellomaggi', parent.document).html("This is a test."+randomNumber);
+        	//jQuery("input[id='#_InsuranceWorkFlow_WAR_InsuranceWorkFlowportlet_:form:j_idt4:idassicurato']").val("PPPPPPPPPPPP");
+
+        });
+
+    </script>       		
+	
+	
+	
+<h:outputScript>
+
+
+
+</h:outputScript>	
+	
+	
+	</h:body>
+	
+	
+</f:view>
+
+
